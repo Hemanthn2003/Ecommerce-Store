@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "./checkout.css";
 import "./checkout-header.css";
+import {formatMoney} from '../utils/money'
 
-function CheckoutPage() {
+
+function CheckoutPage( {cart} ) {
+
   const [deliveryOption1, setDeliveryOption1] = useState("1");
   const [deliveryOption2, setDeliveryOption2] = useState("4");
-
   useEffect(() => {
     document.title = "Checkout";
   }, []);
@@ -50,8 +52,10 @@ function CheckoutPage() {
           <div className="order-summary">
 
             {/* PRODUCT 1 */}
+          {  cart.map((cartItem)=>{
+              return (
 
-            <div className="cart-item-container">
+ <div key={cartItem.productId} className="cart-item-container">
               <div className="delivery-date">
                 Delivery date: Tuesday, June 21
               </div>
@@ -59,19 +63,19 @@ function CheckoutPage() {
               <div className="cart-item-details-grid">
                 <img
                   className="product-image"
-                  src="/images/products/athletic-cotton-socks-6-pairs.jpg"
-                  alt="socks"
+                  src={cartItem.product.image}
+                  alt={cartItem.product.image}
                 />
 
                 <div className="cart-item-details">
                   <div className="product-name">
-                    Black and Gray Athletic Cotton Socks - 6 Pairs
+                    {cartItem.product.name}
                   </div>
 
-                  <div className="product-price">$10.90</div>
+                  <div className="product-price">{formatMoney(cartItem.product.priceCents)}</div>
 
                   <div className="product-quantity">
-                    Quantity: <span className="quantity-label">2</span>
+                    Quantity: <span className="quantity-label">{cartItem.quantity}</span>
                   </div>
                 </div>
 
@@ -133,91 +137,8 @@ function CheckoutPage() {
                 </div>
               </div>
             </div>
-
-            {/* PRODUCT 2 */}
-
-            <div className="cart-item-container">
-              <div className="delivery-date">
-                Delivery date: Wednesday, June 15
-              </div>
-
-              <div className="cart-item-details-grid">
-                <img
-                  className="product-image"
-                  src="/images/products/intermediate-composite-basketball.jpg"
-                  alt="basketball"
-                />
-
-                <div className="cart-item-details">
-                  <div className="product-name">
-                    Intermediate Size Basketball
-                  </div>
-
-                  <div className="product-price">$20.95</div>
-
-                  <div className="product-quantity">
-                    Quantity: <span className="quantity-label">1</span>
-                  </div>
-                </div>
-
-                <div className="delivery-options">
-                  <div className="delivery-options-title">
-                    Choose a delivery option:
-                  </div>
-
-                  <label className="delivery-option">
-                    <input
-                      type="radio"
-                      name="delivery-option-2"
-                      checked={deliveryOption2 === "4"}
-                      onChange={() => setDeliveryOption2("4")}
-                    />
-                    <div>
-                      <div className="delivery-option-date">
-                        Tuesday, June 21
-                      </div>
-                      <div className="delivery-option-price">
-                        FREE Shipping
-                      </div>
-                    </div>
-                  </label>
-
-                  <label className="delivery-option">
-                    <input
-                      type="radio"
-                      name="delivery-option-2"
-                      checked={deliveryOption2 === "5"}
-                      onChange={() => setDeliveryOption2("5")}
-                    />
-                    <div>
-                      <div className="delivery-option-date">
-                        Wednesday, June 15
-                      </div>
-                      <div className="delivery-option-price">
-                        $4.99 Shipping
-                      </div>
-                    </div>
-                  </label>
-
-                  <label className="delivery-option">
-                    <input
-                      type="radio"
-                      name="delivery-option-2"
-                      checked={deliveryOption2 === "6"}
-                      onChange={() => setDeliveryOption2("6")}
-                    />
-                    <div>
-                      <div className="delivery-option-date">
-                        Monday, June 13
-                      </div>
-                      <div className="delivery-option-price">
-                        $9.99 Shipping
-                      </div>
-                    </div>
-                  </label>
-                </div>
-              </div>
-            </div>
+              );
+            })}
 
           </div>
 

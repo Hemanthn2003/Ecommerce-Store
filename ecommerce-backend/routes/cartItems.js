@@ -5,18 +5,25 @@ import { DeliveryOption } from '../models/DeliveryOption.js';
 
 const router = express.Router();
 
+
 router.get('/', async (req, res) => {
   const expand = req.query.expand;
+
   let cartItems = await CartItem.findAll();
 
   if (expand === 'product') {
-    cartItems = await Promise.all(cartItems.map(async (item) => {
-      const product = await Product.findByPk(item.productId);
-      return {
-        ...item.toJSON(),
-        product
-      };
-    }));
+    cartItems = await Promise.all(
+      cartItems.map(async (item) => {
+
+        const product = await Product.findByPk(item.productId);
+
+        return {
+          ...item.toJSON(),
+          product: product ? product.toJSON() : null
+        };
+
+      })
+    );
   }
 
   res.json(cartItems);
