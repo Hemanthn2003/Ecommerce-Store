@@ -1,10 +1,25 @@
+import axios from "axios";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect ,useState} from "react";
 import "./HomePage.css";
 import Header from "./components/header";
-import { products } from './components/products'
+
+
 function HomePage() {
 
+  const[products, setProducts] = useState([])
+
+  useEffect(()=>{
+  axios.get('http://localhost:3000/api/products')
+  .then((response)=>{
+    setProducts(response.data);
+     
+     
+  });
+
+  },[])
+
+  
   useEffect(() => {
     document.title = "Ecommerce Shop";
   }, []);
