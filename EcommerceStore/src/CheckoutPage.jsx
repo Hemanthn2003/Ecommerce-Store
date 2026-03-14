@@ -1,9 +1,9 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import "./checkout.css";
 import "./checkout-header.css";
-import { Link } from "react-router-dom";
 
-const CheckoutPage = () => {
+function CheckoutPage() {
   const [deliveryOption1, setDeliveryOption1] = useState("1");
   const [deliveryOption2, setDeliveryOption2] = useState("4");
 
@@ -17,8 +17,12 @@ const CheckoutPage = () => {
         <div className="header-content">
           <div className="checkout-header-left-section">
             <Link to="/">
-              <img className="logo" src="/images/logo.png" />
-              <img className="mobile-logo" src="/images/mobile-logo.png" />
+              <img className="logo" src="/images/logo.png" alt="logo" />
+              <img
+                className="mobile-logo"
+                src="/images/mobile-logo.png"
+                alt="mobile logo"
+              />
             </Link>
           </div>
 
@@ -31,18 +35,22 @@ const CheckoutPage = () => {
           </div>
 
           <div className="checkout-header-right-section">
-            <img src="/images/icons/checkout-lock-icon.png" />
+            <img
+              src="/images/icons/checkout-lock-icon.png"
+              alt="secure checkout"
+            />
           </div>
         </div>
       </div>
 
       <div className="checkout-page">
-        <div className="page-title">Review your order</div>
+        <h1 className="page-title">Review your order</h1>
 
         <div className="checkout-grid">
           <div className="order-summary">
 
-            {/* Product 1 */}
+            {/* PRODUCT 1 */}
+
             <div className="cart-item-container">
               <div className="delivery-date">
                 Delivery date: Tuesday, June 21
@@ -52,24 +60,18 @@ const CheckoutPage = () => {
                 <img
                   className="product-image"
                   src="/images/products/athletic-cotton-socks-6-pairs.jpg"
+                  alt="socks"
                 />
 
                 <div className="cart-item-details">
                   <div className="product-name">
                     Black and Gray Athletic Cotton Socks - 6 Pairs
                   </div>
+
                   <div className="product-price">$10.90</div>
 
                   <div className="product-quantity">
-                    <span>
-                      Quantity: <span className="quantity-label">2</span>
-                    </span>
-                    <span className="update-quantity-link link-primary">
-                      Update
-                    </span>
-                    <span className="delete-quantity-link link-primary">
-                      Delete
-                    </span>
+                    Quantity: <span className="quantity-label">2</span>
                   </div>
                 </div>
 
@@ -78,7 +80,7 @@ const CheckoutPage = () => {
                     Choose a delivery option:
                   </div>
 
-                  <div className="delivery-option">
+                  <label className="delivery-option">
                     <input
                       type="radio"
                       name="delivery-option-1"
@@ -93,9 +95,9 @@ const CheckoutPage = () => {
                         FREE Shipping
                       </div>
                     </div>
-                  </div>
+                  </label>
 
-                  <div className="delivery-option">
+                  <label className="delivery-option">
                     <input
                       type="radio"
                       name="delivery-option-1"
@@ -107,12 +109,12 @@ const CheckoutPage = () => {
                         Wednesday, June 15
                       </div>
                       <div className="delivery-option-price">
-                        $4.99 - Shipping
+                        $4.99 Shipping
                       </div>
                     </div>
-                  </div>
+                  </label>
 
-                  <div className="delivery-option">
+                  <label className="delivery-option">
                     <input
                       type="radio"
                       name="delivery-option-1"
@@ -124,15 +126,16 @@ const CheckoutPage = () => {
                         Monday, June 13
                       </div>
                       <div className="delivery-option-price">
-                        $9.99 - Shipping
+                        $9.99 Shipping
                       </div>
                     </div>
-                  </div>
+                  </label>
                 </div>
               </div>
             </div>
 
-            {/* Product 2 */}
+            {/* PRODUCT 2 */}
+
             <div className="cart-item-container">
               <div className="delivery-date">
                 Delivery date: Wednesday, June 15
@@ -142,24 +145,18 @@ const CheckoutPage = () => {
                 <img
                   className="product-image"
                   src="/images/products/intermediate-composite-basketball.jpg"
+                  alt="basketball"
                 />
 
                 <div className="cart-item-details">
                   <div className="product-name">
                     Intermediate Size Basketball
                   </div>
+
                   <div className="product-price">$20.95</div>
 
                   <div className="product-quantity">
-                    <span>
-                      Quantity: <span className="quantity-label">1</span>
-                    </span>
-                    <span className="update-quantity-link link-primary">
-                      Update
-                    </span>
-                    <span className="delete-quantity-link link-primary">
-                      Delete
-                    </span>
+                    Quantity: <span className="quantity-label">1</span>
                   </div>
                 </div>
 
@@ -168,7 +165,7 @@ const CheckoutPage = () => {
                     Choose a delivery option:
                   </div>
 
-                  <div className="delivery-option">
+                  <label className="delivery-option">
                     <input
                       type="radio"
                       name="delivery-option-2"
@@ -183,9 +180,9 @@ const CheckoutPage = () => {
                         FREE Shipping
                       </div>
                     </div>
-                  </div>
+                  </label>
 
-                  <div className="delivery-option">
+                  <label className="delivery-option">
                     <input
                       type="radio"
                       name="delivery-option-2"
@@ -197,12 +194,12 @@ const CheckoutPage = () => {
                         Wednesday, June 15
                       </div>
                       <div className="delivery-option-price">
-                        $4.99 - Shipping
+                        $4.99 Shipping
                       </div>
                     </div>
-                  </div>
+                  </label>
 
-                  <div className="delivery-option">
+                  <label className="delivery-option">
                     <input
                       type="radio"
                       name="delivery-option-2"
@@ -214,42 +211,43 @@ const CheckoutPage = () => {
                         Monday, June 13
                       </div>
                       <div className="delivery-option-price">
-                        $9.99 - Shipping
+                        $9.99 Shipping
                       </div>
                     </div>
-                  </div>
+                  </label>
                 </div>
               </div>
             </div>
 
           </div>
 
-          {/* Payment Summary */}
+          {/* PAYMENT SUMMARY */}
+
           <div className="payment-summary">
-            <div className="payment-summary-title">Payment Summary</div>
+            <h2 className="payment-summary-title">Payment Summary</h2>
 
             <div className="payment-summary-row">
-              <div>Items (3):</div>
+              <div>Items (3)</div>
               <div className="payment-summary-money">$42.75</div>
             </div>
 
             <div className="payment-summary-row">
-              <div>Shipping & handling:</div>
+              <div>Shipping</div>
               <div className="payment-summary-money">$4.99</div>
             </div>
 
             <div className="payment-summary-row subtotal-row">
-              <div>Total before tax:</div>
+              <div>Total before tax</div>
               <div className="payment-summary-money">$47.74</div>
             </div>
 
             <div className="payment-summary-row">
-              <div>Estimated tax (10%):</div>
+              <div>Estimated tax</div>
               <div className="payment-summary-money">$4.77</div>
             </div>
 
             <div className="payment-summary-row total-row">
-              <div>Order total:</div>
+              <div>Order total</div>
               <div className="payment-summary-money">$52.51</div>
             </div>
 
@@ -262,6 +260,6 @@ const CheckoutPage = () => {
       </div>
     </>
   );
-};
+}
 
 export default CheckoutPage;
