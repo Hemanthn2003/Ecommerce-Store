@@ -104,3 +104,13 @@ select:focus,
 input:focus {
   outline: 2px solid rgb(25, 135, 84);
 }
+
+.added-to-cart-message {
+  color: green;
+  font-size: 13px;
+  font-weight: 600;
+
+  margin-bottom: 6px;
+
+  display: block;
+}

@@ -1,84 +1,39 @@
-import axios from "axios";
-import { Link } from "react-router-dom";
-import { useEffect ,useState} from "react";
-import "./HomePage.css";
-import Header from "./components/header";
-import {formatMoney} from '../utils/money'
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import Header from './components/Header';
+import { ProductsGrid } from './ProductGrid';
+import './HomePage.css';
 
+export default function HomePage({ cart, loadCart }) {
 
-function HomePage( {cart} ) {
-
-  const[products, setProducts] = useState([]);
-    
-
-  useEffect(()=>{
-  axios.get('/api/products')
-  .then((response)=>{
-    setProducts(response.data);  
-  });
-  },[])
-
-  
+  const [products, setProducts] = useState([]);
+  const [searchText, setSearchText] = useState('');
   useEffect(() => {
-    document.title = "Ecommerce Shop";
+    document.title = "Ecommerce Project";
+
+    const getProducts = async () => {
+      const response = await axios.get('/api/products');
+      setProducts(response.data);
+    };
+
+    getProducts();
   }, []);
+
+  // 🔥 FILTER LOGIC
+  const filteredProducts = products.filter((product) =>
+    product.name.toLowerCase().includes(searchText.toLowerCase())
+  );
 
   return (
     <>
-     
-        <Header cart={cart}/>
+      <Header cart={cart} onSearch={setSearchText} />
+
       <div className="home-page">
-        <div className="products-grid">
-
-{products.map((product)=>{
-return(
-      <div key={product.id} className="product-container">
-            <div className="product-image-container">
-              <img
-                className="product-image"
-                src={product.image}
-              />
-            </div>
-
-            <div className="product-name limit-text-to-2-lines">
-              {product.name}
-            </div>
-
-            <div className="product-rating-container">
-              <img
-                className="product-rating-stars"
-                src={`/images/ratings/rating-${product.rating.stars*10}.png`}
-              />
-              <div className="product-rating-count link-primary">{product.rating.count}</div>
-            </div>
-
-            <div className="product-price">{formatMoney(product.priceCents)}</div>
-
-            <div className="product-quantity-container">
-              <select>
-                {[1,2,3,4,5,6,7,8,9,10].map((num)=>(
-                  <option key={num}>{num}</option>
-                ))}
-              </select>
-            </div>
-
-            <div className="product-spacer"></div>
-
-            <div className="added-to-cart">
-              <img src="/images/icons/checkmark.png" />
-              Added
-            </div>
-
-            <button className="add-to-cart-button button-primary">
-              Add to Cart
-            </button>
-          </div>
-)
-})}
-        </div>
+        <ProductsGrid
+          products={filteredProducts}
+          loadCart={loadCart}
+        />
       </div>
     </>
   );
 }
-
-export default HomePage;
