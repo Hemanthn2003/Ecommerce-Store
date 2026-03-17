@@ -5,10 +5,12 @@ import './OrdersPage.css';
 import Header from './components/Header';
 import dayjs from 'dayjs';
 import { formatMoney } from "../utils/money";
-const OrdersPage = () => {
+
+
+const OrdersPage = ({ loadCart, cart }) => {
 
   const [orders, setOrders] = useState([]);
-
+  const [addedProductId, setAddedProductId] = useState(null);
   useEffect(() => {
     document.title = "Orders";
 
@@ -22,9 +24,31 @@ const OrdersPage = () => {
 
   }, []);
 
+const addToCart = async (productId) => {
+  try {
+    await axios.post('/api/cart-items', {
+      productId,
+      quantity: 1
+    });
+
+    if (loadCart) {
+      await loadCart();
+    }
+
+    // ✅ show message only for this product
+    setAddedProductId(productId);
+
+    setTimeout(() => {
+      setAddedProductId(null);
+    }, 2000);
+
+  } catch (error) {
+    console.error(error);
+  }
+};
   return (
     <>
-      <Header />
+      <Header cart={cart} />
 
       <div className="orders-page">
         <div className="page-title">Your Orders</div>
@@ -97,8 +121,16 @@ const OrdersPage = () => {
                           <div className="product-quantity">
                             Quantity: {item.quantity}
                           </div>
-
-                          <button className="buy-again-button button-primary">
+                           {addedProductId === item.product.id && (
+                           
+                           <div className="added-to-cart-message">
+                                ✔ Added to Cart
+                              </div>
+                            )}
+                          <button
+                            className="buy-again-button button-primary"
+                            onClick={() => addToCart(item.product.id)}
+                          >
                             <img
                               className="buy-again-icon"
                               src="images/icons/buy-again.png"

@@ -9,6 +9,7 @@ import { formatMoney } from '../utils/money';
 function CheckoutPage({ cart, loadCart }) {
 const [deliveryOptions, setDeliveryOptions] = useState([]);
 const [cartState, setCartState] = useState([]);
+const [showPopup, setShowPopup] = useState(false);
 
 useEffect(() => {
   setCartState(cart);
@@ -43,17 +44,24 @@ const placeOrder = async () => {
   console.log("CLICKED");
 
   try {
-    await axios.post('/api/orders');
+    // ✅ SAVE FULL ORDER DATA
+    await axios.post('/api/orders', {
+      createdAt: new Date(),
+      estimatedDeliveryDate: dayjs().add(5, 'day').toISOString(),
+      products: cartState
+    });
 
-    // ❌ remove delete API
-    // ✅ just clear UI
     setCartState([]);
 
     if (loadCart) {
       await loadCart();
     }
 
-    alert("Order placed successfully ✅");
+    setShowPopup(true);
+
+    setTimeout(() => {
+      setShowPopup(false);
+    }, 2000);
 
   } catch (error) {
     console.error(error);
@@ -61,6 +69,11 @@ const placeOrder = async () => {
 };
   return (
     <>
+    {showPopup && (
+  <div className="order-popup">
+    ✔ Order placed successfully
+  </div>
+)}
       <div className="checkout-header">
         <div className="header-content">
           <div className="checkout-header-left-section">

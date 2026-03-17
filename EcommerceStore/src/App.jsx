@@ -5,6 +5,8 @@ import { Routes, Route } from 'react-router-dom';
 import './App.css';
 import CheckoutPage from './CheckoutPage';
 import OrdersPage from './OrdersPage';
+import TrackingPage from './TrackingPage';
+
 
 function App() {
 
@@ -37,9 +39,13 @@ function App() {
 
         <Route
           path="/orders"
-          element={<OrdersPage cart={cart} />}
+          element={<OrdersPage cart={cart} loadCart={loadCart}/>}
         />
 
+         <Route
+            path="/tracking/:orderId"
+            element={<TrackingPage cart={cart} />}
+         />
       </Routes>
     </>
   );
