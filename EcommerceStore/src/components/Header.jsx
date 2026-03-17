@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import "./header.css";
-
+import logo from "./logo-white1.png";
+import mobileLogo from "./mobile-logo-white1.png";
 const Header = ({ cart, onSearch }) => {
 
   const [searchText, setSearchText] = useState('');
@@ -25,9 +26,9 @@ const Header = ({ cart, onSearch }) => {
 
       <div className="left-section">
         <Link to="/" className="header-link">
-          <img className="logo" src="/images/logo-white.png" />
-          <img className="mobile-logo" src="/images/mobile-logo-white.png" />
-        </Link>
+          <img className="logo" src={logo} />
+          <img className="mobile-logo" src={mobileLogo} />
+ </Link>
       </div>
 
       <div className="middle-section">

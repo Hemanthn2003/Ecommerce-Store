@@ -142,3 +142,34 @@ input:focus {
   z-index: 9999;
     animation: fadeInOut 2s ease;
 }
+
+
+
+
+
+
+
+
+
+.products-grid {
+  display: grid;
+  gap: 20px;
+  padding: 20px;
+
+  /* MOBILE (default) */
+  grid-template-columns: 1fr;
+}
+
+/* TABLET */
+@media (min-width: 600px) {
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* DESKTOP */
+@media (min-width: 992px) {
+  .products-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
