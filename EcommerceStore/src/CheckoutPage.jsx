@@ -5,7 +5,8 @@ import { Link } from "react-router-dom";
 import "./checkout.css";
 import "./checkout-header.css";
 import { formatMoney } from '../utils/money';
-
+import logo from "./logo-white1.png";
+import mobileLogo from "./mobile-logo-white1.png";
 function CheckoutPage({ cart, loadCart }) {
 const [deliveryOptions, setDeliveryOptions] = useState([]);
 const [cartState, setCartState] = useState([]);
@@ -78,10 +79,10 @@ const placeOrder = async () => {
         <div className="header-content">
           <div className="checkout-header-left-section">
             <Link to="/">
-              <img className="logo" src="/images/logo.png" alt="logo" />
+              <img className="logo" src={logo} alt="logo" />
               <img
                 className="mobile-logo"
-                src="/images/mobile-logo.png"
+                src={mobileLogo}
                 alt="mobile logo"
               />
             </Link>
