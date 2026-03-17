@@ -5,8 +5,10 @@ import { Link } from "react-router-dom";
 import "./checkout.css";
 import "./checkout-header.css";
 import { formatMoney } from '../utils/money';
-import logo from "./components/logo-white1.png";
-import mobileLogo from "./components/mobile-logo-white1.png";
+import logo from "./logo-white1.png";
+import mobileLogo from "./mobile-logo-white1.png";
+import lockIcon from "./checkout-lock-icon.png";
+
 function CheckoutPage({ cart, loadCart }) {
 const [deliveryOptions, setDeliveryOptions] = useState([]);
 const [cartState, setCartState] = useState([]);
@@ -98,7 +100,7 @@ const placeOrder = async () => {
 
           <div className="checkout-header-right-section">
             <img
-              src="/images/icons/checkout-lock-icon.png"
+              src={lockIcon}
               alt="secure checkout"
             />
           </div>
