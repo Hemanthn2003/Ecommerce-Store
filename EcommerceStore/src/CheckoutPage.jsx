@@ -16,7 +16,7 @@ useEffect(() => {
 }, [cart]);
 
   useEffect(() => {
-    axios.get('/api/delivery-options')
+    axios.get('https://ecommerce-store-881d.onrender.com/api/delivery-options')
       .then((response) => {
         setDeliveryOptions(response.data);
       });
@@ -45,7 +45,7 @@ const placeOrder = async () => {
 
   try {
     // ✅ SAVE FULL ORDER DATA
-    await axios.post('/api/orders', {
+    await axios.post('https://ecommerce-store-881d.onrender.com/api/orders', {
       createdAt: new Date(),
       estimatedDeliveryDate: dayjs().add(5, 'day').toISOString(),
       products: cartState

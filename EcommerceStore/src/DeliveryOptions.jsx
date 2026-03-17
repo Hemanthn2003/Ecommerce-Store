@@ -6,7 +6,7 @@ export function DeliveryOptions({ cartItem, deliveryOptions, loadCart }) {
 
   // ✅ update delivery option in backend
   const updateDeliveryOption = async (deliveryOptionId) => {
-    await axios.put(`/api/cart-items/${cartItem.productId}`, {
+    await axios.put(`https://ecommerce-store-881d.onrender.com/api/cart-items/${cartItem.productId}`, {
       deliveryOptionId
     });
 

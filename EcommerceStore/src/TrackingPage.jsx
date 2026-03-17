@@ -11,7 +11,7 @@ const TrackingPage = ({ cart }) => {
   const [animatedProgress, setAnimatedProgress] = useState(0);
 
   useEffect(() => {
-    axios.get(`/api/orders/${orderId}?expand=products`)
+    axios.get(`https://ecommerce-store-881d.onrender.com/api/orders/${orderId}?expand=products`)
       .then((res) => {
         setOrder(res.data);
       });

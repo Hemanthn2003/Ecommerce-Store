@@ -14,7 +14,7 @@ const OrdersPage = ({ loadCart, cart }) => {
   useEffect(() => {
     document.title = "Orders";
 
-    axios.get('/api/orders?expand=products')
+    axios.get('https://ecommerce-store-881d.onrender.com/api/orders?expand=products')
       .then((res) => {
         setOrders(res.data);
       })
@@ -26,7 +26,7 @@ const OrdersPage = ({ loadCart, cart }) => {
 
 const addToCart = async (productId) => {
   try {
-    await axios.post('/api/cart-items', {
+    await axios.post('https://ecommerce-store-881d.onrender.com/api/cart-items', {
       productId,
       quantity: 1
     });

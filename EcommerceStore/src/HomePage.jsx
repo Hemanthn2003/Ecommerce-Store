@@ -12,7 +12,7 @@ export default function HomePage({ cart, loadCart }) {
     document.title = "Ecommerce Project";
 
     const getProducts = async () => {
-      const response = await axios.get('/api/products');
+      const response = await axios.get('https://ecommerce-store-881d.onrender.com/api/products');
       setProducts(response.data);
     };
 
